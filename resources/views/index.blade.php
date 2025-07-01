@@ -143,7 +143,8 @@
             <!-- Insert Episode Form -->
             <div class="form-container">
                 <h3 class="text-xl font-semibold text-indigo-600 mb-4">Insert Episode</h3>
-                <form enctype="multipart/form-data" class="space-y-4">
+                <form enctype="multipart/form-data" action="/movie" method="POST" class="space-y-4">
+                    @csrf
                     <div>
                         <label for="movieIDInsert" class="block text-sm font-medium">Movie ID</label>
                         <input type="text" id="movieIDInsert" name="movieID" placeholder="Movie ID" class="mt-1 block w-full">
