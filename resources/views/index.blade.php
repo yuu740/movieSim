@@ -118,6 +118,17 @@
             border-radius: 6px;
             margin-bottom: 0.5rem;
         }
+        .error-message {
+            background: #7f1d1d;
+            color: #facc15;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: opacity 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -169,6 +180,19 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Insert Movie Form -->
             <div class="form-container">
+                @if($errors->has('image') || $errors->has('title') || $errors->has('description'))
+                    <div class="error-message">
+                        @foreach($errors->get('image') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                        @foreach($errors->get('title') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                        @foreach($errors->get('description') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
                 <h3 class="text-2xl font-semibold text-center mb-6">Add New Movie</h3>
                 <form enctype="multipart/form-data" action="/create-movie" method="POST" class="space-y-6">
                     @csrf
@@ -190,6 +214,19 @@
 
             <!-- Insert Episode Form -->
             <div class="form-container">
+                @if($errors->has('movieID') || $errors->has('episodes') || $errors->has('title'))
+                    <div class="error-message">
+                        @foreach($errors->get('movieID') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                        @foreach($errors->get('episodes') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                        @foreach($errors->get('title') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
                 <h3 class="text-2xl font-semibold text-center mb-6">Add Episode</h3>
                 <form enctype="multipart/form-data" action="/create-episode" method="POST" class="space-y-6">
                     @csrf
@@ -211,6 +248,22 @@
 
             <!-- Update Movie Form -->
             <div class="form-container">
+                @if($errors->has('id') || $errors->has('image') || $errors->has('title') || $errors->has('description'))
+                    <div class="error-message">
+                        @foreach($errors->get('id') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                        @foreach($errors->get('image') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                        @foreach($errors->get('title') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                        @foreach($errors->get('description') as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
                 <h3 class="text-2xl font-semibold text-center mb-6">Update Movie</h3>
                 <form enctype="multipart/form-data" action="/update-movie" method="POST" class="space-y-6">
                     @csrf
