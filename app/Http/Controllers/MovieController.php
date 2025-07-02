@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class MovieController extends Controller
 {
@@ -14,6 +15,18 @@ class MovieController extends Controller
         return view('index', ['movies' => $movies]);
     }
     public function createMovie(Request $req) {
+        $rules = [
+            'image' => 'required',
+            'title' => 'required',
+            'description' => 'required|min:15'
+        ];
+
+        $validator = Validator::make($req->all(), $rules);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
         $file = $req->file('image');
         $imageName = time().'.'.$file->getClientOriginalExtension();
         // Storage::disk('public')->putFileAs('images', $file, $imageName);
